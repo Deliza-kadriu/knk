@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1098.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TreeTableView fx:id="TreeTableView" layoutX="1.0" prefHeight="550.0" prefWidth="680.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="398.0" AnchorPane.topAnchor="20.0">
+        <columns>
+          <TreeTableColumn fx:id="PnameCol" prefWidth="113.0000057220459" text="Patient name" />
+          <TreeTableColumn fx:id="DnameCol" prefWidth="113.3333282470703" text="Doctor Name" />
+            <TreeTableColumn fx:id="AgeCol" prefWidth="113.99993896484375" text="Age" />
+            <TreeTableColumn fx:id="DateCol" prefWidth="113.00003051757812" text="Date" />
+            <TreeTableColumn fx:id="TypeCol" prefWidth="113.33331298828125" text="Type" />
+            <TreeTableColumn prefWidth="113.3333740234375" text="Result" />
+        </columns>
+      </TreeTableView>
+      <TextField id="Search" layoutX="725.0" layoutY="34.0" prefHeight="36.0" prefWidth="319.0" promptText="Search.." style="-fx-border-color: #43dda1;" />
+      <HBox layoutX="725.0" layoutY="84.0" prefHeight="57.0" prefWidth="380.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="89.0" style="-fx-background-color: #43dda1;" text="Add" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="88.0" style="-fx-background-color: #43dda1;" text="Delete" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="89.0" style="-fx-background-color: #43dda1;" text="Edit" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="87.0" style="-fx-background-color: #43dda1;" text="Clear" textFill="WHITE" />
+         </children>
+      </HBox>
+      <AnchorPane layoutX="725.0" layoutY="167.0" prefHeight="217.0" prefWidth="349.0" style="-fx-border-color: #00000037; -fx-border-radius: 5px;" AnchorPane.bottomAnchor="216.0" AnchorPane.leftAnchor="725.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="167.0">
+         <children>
+            <Label layoutX="15.0" layoutY="15.0" prefHeight="22.0" prefWidth="89.0" text="Patient Name" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="294.0" AnchorPane.topAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="50.0" prefHeight="22.0" prefWidth="87.0" text="Doctor Name" />
+            <Label layoutX="14.0" layoutY="85.0" prefHeight="22.0" prefWidth="87.0" text="Age" />
+            <Label layoutX="14.0" layoutY="120.0" prefHeight="22.0" prefWidth="87.0" text="Date" />
+            <Label layoutX="14.0" layoutY="156.0" prefHeight="15.0" prefWidth="87.0" text="Type" />
+            <Label layoutX="14.0" layoutY="193.0" prefHeight="22.0" prefWidth="87.0" text="Result" />
+            <TextField fx:id="PnameTF" layoutX="135.0" layoutY="13.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #43dda1;" />
+            <TextField fx:id="DnameTF" layoutX="135.0" layoutY="49.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #43dda1;" />
+            <TextField fx:id="AgeTF" layoutX="135.0" layoutY="84.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #43dda1;" />
+            <ChoiceBox fx:id="TypeTF" layoutX="135.0" layoutY="153.0" prefWidth="150.0" />
+            <DatePicker fx:id="DateTF" layoutX="135.0" layoutY="118.0" />
+            <Label layoutX="15.0" layoutY="17.0" text="Patient Name" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="725.0" layoutY="394.0" prefHeight="182.0" prefWidth="349.0" style="-fx-border-color: #00000037; -fx-border-radius: 5px;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="725.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="394.0">
+         <children>
+            <Label layoutX="13.0" layoutY="46.0" text="Doctor Name" />
+            <Label layoutX="18.0" layoutY="76.0" text="Age" />
+            <Label layoutX="16.0" layoutY="108.0" text="Date" />
+            <Label layoutX="12.0" layoutY="14.0" text="Patient Name" />
+            <Label layoutX="15.0" layoutY="137.0" text="Type" />
+            <Label fx:id="PnameLB" layoutX="153.0" layoutY="15.0" text="Label" />
+            <Label fx:id="DnameLB" layoutX="155.0" layoutY="47.0" text="Label" />
+            <Label fx:id="AgeLB" layoutX="155.0" layoutY="77.0" text="Label" />
+            <Label fx:id="DateLB" layoutX="153.0" layoutY="108.0" text="Label" />
+            <Label fx:id="TypeLB" layoutX="155.0" layoutY="137.0" text="Label" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
