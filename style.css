@@ -1,4 +1,8 @@
 
+
+#BTNS :hover{
+    -fx-background-color: #ffa35f;
+}
 .tree-table-view{
     -fx-tree-table-color: #43dda1;
     -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
@@ -55,12 +59,10 @@
 
 .tree-table-view .column-overlay{
     -fx-background-color:  #43dda1;
-    background-color: #43dda1;
 }
 
 .tree-table-view .column-resize-line, .tree-table-view .column-drag-header{
     -fx-background-color:  #43dda1;
-    background-color: #43dda1;
 
 }
 
@@ -87,7 +89,4 @@
 }
 
 
-#BTNS :hover{
-    -fx-background-color: #ffa35f;
-}
 
