@@ -1,6 +1,9 @@
 package ordinance;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -11,7 +14,9 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.mysql.jdbc.Statement;
 
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,6 +28,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
@@ -143,11 +150,22 @@ public class Controller implements Initializable {
         TreeItem<Model> root = new RecursiveTreeItem<Model>(list, RecursiveTreeObject:: getChildren);
         TreeTableView.setRoot(root);
         TreeTableView.setShowRoot(false);
-        
-        list.add(new Model("name", "dname"," age2"," date"," type"," result"));
-        list.add(new Model("name1", "dname"," age"," date"," type"," result"));
-        list.add(new Model("name2", "dname"," age"," date"," type"," result"));
-
+        try {
+        	
+        	dbconn conn = new dbconn();
+            conn.st = (Statement)conn.connection.createStatement();
+    		String query = "select * from patients ";
+    		 conn.rs = conn.st.executeQuery(query);
+    		 
+    	      while (conn.rs.next())
+    	      {
+    	         list.add(new Model(conn.rs.getString("name"), conn.rs.getString("doctorName"),conn.rs.getString("age"),conn.rs.getString("date"),conn.rs.getString("type"),conn.rs.getString("result")));
+    	      }
+			
+		} catch (Exception e) {
+			
+		}
+       
         
         searchTF.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -173,14 +191,30 @@ public class Controller implements Initializable {
 	
 	
 	@FXML
-	void addAction(ActionEvent event) {
-		list.addAll(new Model(nameTF.getText(),dnameTF.getText(),ageTF.getText(),dateTF.getText(),typeTF.getSelectionModel().getSelectedItem(),resultTF.getText()));     
+	void addAction(ActionEvent event) throws ClassNotFoundException, SQLException {
+		
+		dbconn conn = new dbconn();
+        conn.insert(nameTF.getText(),dnameTF.getText(),ageTF.getText(),dateTF.getText(),typeTF.getSelectionModel().getSelectedItem(),resultTF.getText());
+        list.addAll(new Model(nameTF.getText(),dnameTF.getText(),ageTF.getText(),dateTF.getText(),typeTF.getSelectionModel().getSelectedItem(),resultTF.getText()));     
+		// String query1 = "INSERT INTO patients(name,doctorName,age,date,type,result) " + "VALUES ("+"'"+nameTF.getText()+"',"+" '"+dnameTF.getText()+"',"+" '"+ageTF.getText()+"',"+"'"+dateTF.getText()+"',"+" '"+typeTF.getSelectionModel().getSelectedItem()+"',"+"'"+resultTF.getText()+"')";
+	    
+		
 	}
+	//@FXML
+	//void handleKeyPressed(KeyEvent ke) {
+		//int index=TreeTableView.getSelectionModel().getSelectedIndex();
+          //  if(ke.getCode().equals(KeyCode.DELETE)) {
+            //	 list.remove(index);
+           // }
+//	}
+		
 	
 	 @FXML
-	    void  deleteAction(ActionEvent event){
+	    void  deleteAction(ActionEvent event) throws SQLException{
 	        int index=TreeTableView.getSelectionModel().getSelectedIndex();
 	        list.remove(index);
+	        dbconn conn = new dbconn();
+	        conn.delete(dateTF.getText(), dnameTF.getText(), nameTF.getText());
 	        clearFields();
 	      
 	    }
@@ -230,14 +264,26 @@ public class Controller implements Initializable {
 	    }
 
 	    @FXML
-	    void editAction(ActionEvent event) {
+	    void editAction(ActionEvent event) throws SQLException {
 	    	TreeItem<Model> treeItem = TreeTableView.getSelectionModel().getSelectedItem();
-	    
+	        String a = treeItem.getValue().date.get();
+	        String b =treeItem.getValue().name.get();
+	        String c =treeItem.getValue().dname.get();
+	        dbconn con = new dbconn();
+	        
+	        con.st = (Statement) con.connection.createStatement();
+	    	String query = "UPDATE patients SET name='"+nameTF.getText()+"',doctorName='"+dateTF.getText()+"',age='" +ageTF.getText()+"',date='"+dateTF.getText()+"',type='"+typeTF.getSelectionModel().getSelectedItem()+"',result='"+resultTF.getText()+"' where name = '" + b + "'&& doctorName='"+c+"'&& date='"+a+"'";
+	    	con.st.executeUpdate(query);
 	    	Model m = new Model(nameTF.getText(), dnameTF.getText(), ageTF.getText(), dateTF.getText(), typeTF.getSelectionModel().getSelectedItem(), resultTF.getText());
 	    	treeItem.setValue(m);
 	    }
 	    
 	}
+
+
+
+
+
 
 
 
